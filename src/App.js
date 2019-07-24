@@ -9,24 +9,53 @@ class App extends Component {
     super();
 
     this.state = {
-      result: ""
+      result: "0"
     }
   }
 
   onClick = button => {
-    if(button === "=") {
+    if (button === "=") {
       this.calculate()
     }
-    else if(button === "C") {
+    else if (button === "C") {
       this.reset()
     }
-    else if(button === "CE") {
+    else if (button === "CE") {
       this.backspace()
     }
+    else if (button === ".") {
+      if (this.state.result.slice(-1) === "." || this.state.result.search(/[.]/g) !== -1) {
+
+      }
+      else {
+        this.setState({
+          result: this.state.result + button
+        })
+      }
+    }
+    else if (button === "+" || button === "-" || button === "*" || button === "/") {
+      if (this.state.result.slice(-1) === "+" || this.state.result.slice(-1) === "-" || this.state.result.slice(-1) === "*" || this.state.result.slice(-1) === "/") {
+        this.setState({
+          result: this.state.result.slice(0,-1) + button
+        })
+      }
+      else {
+        this.setState({
+          result: this.state.result + button
+        })
+      }
+    }
     else {
-      this.setState({
-        result: this.state.result + button
-      })
+      if (this.state.result === "0") {
+        this.setState({
+          result: button
+        })
+      }
+      else {
+        this.setState({
+          result: this.state.result + button
+        })
+      }
     }
   }
 
@@ -34,7 +63,7 @@ class App extends Component {
     try {
       this.setState({
         // eslint-disable-next-line
-        result: (eval(this.state.result) || "" ) + ""
+        result: (eval(this.state.result) || "") + ""
       })
     } catch (e) {
       this.setState({
@@ -45,7 +74,7 @@ class App extends Component {
 
   reset = () => {
     this.setState({
-      result: "7"
+      result: "0"
     })
   };
 
