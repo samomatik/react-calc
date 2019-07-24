@@ -24,7 +24,7 @@ class App extends Component {
       this.backspace()
     }
     else if (button === ".") {
-      if (this.state.result.slice(-1) === "." || this.state.result.search(/[.]/g) !== -1) {
+      if (this.state.result.slice(-1) === ".") {
 
       }
       else {
