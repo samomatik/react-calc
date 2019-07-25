@@ -38,9 +38,14 @@ class App extends Component {
       }
     }
     else if (button === "+" || button === "*" || button === "/") {
-      if (this.state.result.slice(-1) === "+" || this.state.result.slice(-1) === "-" || this.state.result.slice(-1) === "*" || this.state.result.slice(-1) === "/") {
+      if (this.state.result.slice(-1) === "+" || this.state.result.slice(-1) === "*" || this.state.result.slice(-1) === "/") {
         this.setState({
           result: this.state.result.slice(0,-1) + button
+        })
+      }
+      else if (this.state.result.slice(-1) === "-") {
+        this.setState({
+          result: this.state.result.slice(0, -2) + button
         })
       }
       else {
