@@ -4,6 +4,9 @@ import './App.css';
 import ResultComponent from './components/ResultComponent';
 import KeypadComponent from './components/KeypadComponent';
 
+// const isOperator = /[x/+‑]/,
+//       endsWithOperator = /[x+‑/]$/;
+
 class App extends Component {
   constructor() {
     super();
@@ -24,7 +27,7 @@ class App extends Component {
       this.backspace()
     }
     else if (button === ".") {
-      if (this.state.result.slice(-1) === "." || this.state.result.search(/[.]/g) !== -1) {
+      if (this.state.result.slice(-1) === "." ) {
 
       }
       else {
@@ -33,11 +36,21 @@ class App extends Component {
         })
       }
     }
-    else if (button === "+" || button === "-" || button === "*" || button === "/") {
+    else if (button === "+" || button === "*" || button === "/") {
       if (this.state.result.slice(-1) === "+" || this.state.result.slice(-1) === "-" || this.state.result.slice(-1) === "*" || this.state.result.slice(-1) === "/") {
         this.setState({
           result: this.state.result.slice(0,-1) + button
         })
+      }
+      else {
+        this.setState({
+          result: this.state.result + button
+        })
+      }
+    }
+    else if (button === "-") {
+      if (this.state.result.slice(-1) === "-") {
+
       }
       else {
         this.setState({
