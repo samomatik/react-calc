@@ -4,9 +4,6 @@ import './App.css';
 import ResultComponent from './components/ResultComponent';
 import KeypadComponent from './components/KeypadComponent';
 
-// const isOperator = /[x/+‑]/,
-//       endsWithOperator = /[x+‑/]$/;
-
 class App extends Component {
   constructor() {
     super();
@@ -27,8 +24,20 @@ class App extends Component {
       this.backspace()
     }
     else if (button === ".") {
+      var expression = this.state.result;
+      var copy = expression;
 
-      if (this.state.result.slice(-1) === ".") {
+      expression = expression.replace(/[0-9]+/g, "#").replace(/[(||.)]/g, "");
+      var numbers = copy.split(/[^0-9.]+/);
+      var operators = expression.split("#").filter(function (n) { return n });
+      var result = [];
+
+      for (var i = 0; i < numbers.length; i++) {
+        result.push(numbers[i]);
+        if (i < operators.length) result.push(operators[i]);
+      }
+
+      if (result[result.length -1].includes('.')) {
 
       }
       else {
@@ -106,8 +115,8 @@ class App extends Component {
   render() {
     return (
       <div>
+        <h1>Simple Calculator</h1>
         <div className="calculator-body">
-          <h1>Simple Calculator</h1>
           <ResultComponent result={this.state.result} />
           <KeypadComponent onClick={this.onClick} />
           <ReactFCCtest />
